@@ -25,11 +25,8 @@ tar zcf "$BACKUP_FILENAME_DATABASE.tar.gz" "$BACKUP_FILENAME_DATABASE.sql"
 echo "Removing temporary database SQL file"
 rm "$BACKUP_TEMP_DIR/$BACKUP_FILENAME_DATABASE.sql"
 
-echo "Compressing files"
-tar czf "$BACKUP_TEMP_DIR/$BACKUP_FILENAME_FILES.tar.gz" "$SCRIPT_DIR/$BACKUP_LYCHEE_FILES_PATH"
-
-echo "Sending compressed files to $BACKUP_DESTINATION"
-rsync --archive --no-links "$BACKUP_TEMP_DIR/" "$BACKUP_DESTINATION"
+echo "Sending files to $BACKUP_DESTINATION"
+rsync --archive --no-links "$BACKUP_TEMP_DIR/" "$SCRIPT_DIR/$BACKUP_LYCHEE_FILES_PATH" "$BACKUP_DESTINATION"
 
 echo "Removing temporary directory $BACKUP_TEMP_DIR"
 rm -rf "$BACKUP_TEMP_DIR"
